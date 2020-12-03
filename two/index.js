@@ -2,12 +2,12 @@ const fs = require('fs');
 const path = require('path');
 
 const input = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf-8');
-const rawInput = input.split('\n');
+const rowInput = input.split('\n');
 
-const one = rawInput => {
-    const listValidPasswords = rawInput.filter(raw => {
+const one = rowInput => {
+    const listValidPasswords = rowInput.filter(row => {
         //9-10 l: llmllllllv
-        let [times, letter, password] = raw.split(' ');
+        let [times, letter, password] = row.split(' ');
         const [min, max] = times.split('-').map(value => parseInt(value));
         letter = letter.slice(0, 1);
 
@@ -18,9 +18,9 @@ const one = rawInput => {
     return listValidPasswords.length;
 };
 
-const two = rawInput => {
-    const listValidPasswords = rawInput.filter(raw => {
-        let [times, letter, password] = raw.split(' ');
+const two = rowInput => {
+    const listValidPasswords = rowInput.filter(row => {
+        let [times, letter, password] = row.split(' ');
         letter = letter.slice(0, 1);
         const arrayPassword = password.split('');
         const [x, y] = times.split('-').map(value => arrayPassword[parseInt(value) - 1]);
@@ -31,5 +31,5 @@ const two = rawInput => {
     return listValidPasswords.length;
 };
 
-console.log(one(rawInput));
-console.log(two(rawInput));
+console.log(one(rowInput));
+console.log(two(rowInput));
