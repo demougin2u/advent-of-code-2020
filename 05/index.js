@@ -40,7 +40,17 @@ const calculateColumnID = partition => calculateID({
 const calculateSeatID = boardingPass => 8 * calculateRowID(boardingPass.rowPartition) + calculateColumnID(boardingPass.columnPartition);
 
 const one = passes => Math.max(...passes.map(calculateSeatID));
-const two = input => 0;
+const two = passes => {
+    let seatsIDs = passes.map(calculateSeatID).sort();
+    let id = seatsIDs.shift();
+    while (seatsIDs.length > 0) {
+        const expectedID = id + 1;
+        id = seatsIDs.shift();
+        if (expectedID !== id) {
+            return expectedID;
+        }
+    }
+};
 
 console.log(one(boardingPasses));
-console.log(two(input));
+console.log(two(boardingPasses));
