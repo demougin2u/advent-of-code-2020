@@ -33,5 +33,12 @@ const one = (bagsDescriptions, searchedBag) => Object.keys(bagsDescriptions).red
     0
 );
 
+const countAllBags = (bagsDescriptions, bag) => Object.keys(bag).reduce(
+    (count, bagType) => count + bag[bagType] + bag[bagType] * countAllBags(bagsDescriptions, bagsDescriptions[bagType]) || 1,
+    0
+);
+
+const two = (bagsDescriptions, searchedBag) => countAllBags(bagsDescriptions, bagsDescriptions[searchedBag]);
+
 console.log(one(formattedInput, 'shiny_gold'));
-// console.log(two(input));
+console.log(two(formattedInput, 'shiny_gold'));
